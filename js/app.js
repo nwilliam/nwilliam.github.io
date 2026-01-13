@@ -92,33 +92,54 @@ function calculateAndRender() {
   const totalEmployees = numDirectors + numManagers + numGeneralists;
 
   // Employee cost per hour for driving only
-  const costDirectors = numDirectors * HOURLY_RATE.directors * PRC_FACTORS.directors;
-  const costManagers = numManagers * HOURLY_RATE.managers * PRC_FACTORS.managers;
-  const costGeneralists = numGeneralists * HOURLY_RATE.generalists * PRC_FACTORS.generalists;
-  const totalEmployeeCostPerHour = costDirectors + costManagers + costGeneralists;
+  const costDirectors =
+    numDirectors * HOURLY_RATE.directors * PRC_FACTORS.directors;
+  const costManagers =
+    numManagers * HOURLY_RATE.managers * PRC_FACTORS.managers;
+  const costGeneralists =
+    numGeneralists * HOURLY_RATE.generalists * PRC_FACTORS.generalists;
+  const totalEmployeeCostPerHour =
+    costDirectors + costManagers + costGeneralists;
 
   // Driving
-  const driveHours = selectedAirport1.drivingFromKSTP / DRIVING_SPEED_MPH * (ROUND_TRIP ? 2 : 1);
-  const carsNeeded = Math.ceil(totalEmployees / VEHICLE_CAPACITY);
-  const driveDistanceCost = selectedAirport1.drivingFromKSTP * COST_PER_MILE.driving * (ROUND_TRIP ? 2 : 1) * carsNeeded;
-  const numDays = Math.floor((driveHours + hoursAtDest) / HOURS_ALLOWED_PER_DAY);
-  const driveLodging = totalEmployees * LODGING_PER_PERSON * numDays;
-  const driveEmployeeTotal = totalEmployeeCostPerHour * driveHours;
-  const driveTotal = driveEmployeeTotal + driveDistanceCost + driveLodging;
+  const driveHours =
+    selectedAirport1.drivingFromKSTP / DRIVING_SPEED_MPH * (ROUND_TRIP ? 2 : 1);
+  const carsNeeded =
+    Math.ceil(totalEmployees / VEHICLE_CAPACITY);
+  const driveDistanceCost =
+    selectedAirport1.drivingFromKSTP * COST_PER_MILE.driving * (ROUND_TRIP ? 2 : 1) * carsNeeded;
+  const numDays =
+    Math.floor((driveHours + hoursAtDest) / HOURS_ALLOWED_PER_DAY);
+  const driveLodging =
+    totalEmployees * LODGING_PER_PERSON * numDays;
+  const driveEmployeeTotal =
+    totalEmployeeCostPerHour * driveHours;
+  const driveTotal =
+    driveEmployeeTotal + driveDistanceCost + driveLodging;
 
   // Flying - King Air
-  const flyHoursKingAir = selectedAirport1.flyingFromKSTP / FLYING_SPEED_MPH_KING_AIR * (ROUND_TRIP ? 2 : 1);
-  const flyDistanceCostKingAir = selectedAirport1.flyingFromKSTP * COST_PER_MILE.flyingKingAir * (ROUND_TRIP ? 2 : 1);
-  const flyNumDaysKingAir = Math.floor((flyHoursKingAir + hoursAtDest) / HOURS_ALLOWED_PER_DAY_FLYING);
-  const flyLodgingKingAir = (totalEmployees + 2) * (LODGING_PER_PERSON) * flyNumDaysKingAir; //technically we could just send the plane home. if(hoursAtDest > X) flyDistanceCostKingAir*=2
-  const flyTotalKingAir = flyDistanceCostKingAir + flyLodgingKingAir;
+  const flyHoursKingAir =
+    selectedAirport1.flyingFromKSTP / FLYING_SPEED_MPH.kingAir * (ROUND_TRIP ? 2 : 1);
+  const flyDistanceCostKingAir =
+    selectedAirport1.flyingFromKSTP * COST_PER_MILE.flyingKingAir * (ROUND_TRIP ? 2 : 1);
+  const flyNumDaysKingAir =
+    Math.floor((flyHoursKingAir + hoursAtDest) / HOURS_ALLOWED_PER_DAY_FLYING);
+  const flyLodgingKingAir =
+    (totalEmployees + 2) * (LODGING_PER_PERSON) * flyNumDaysKingAir; //technically we could just send the plane home. if(hoursAtDest > X) flyDistanceCostKingAir*=2
+  const flyTotalKingAir =
+    flyDistanceCostKingAir + flyLodgingKingAir;
 
   // Flying - Kodiak
-  const flyHoursKodiak = selectedAirport1.flyingFromKSTP / FLYING_SPEED_MPH_KODIAK * (ROUND_TRIP ? 2 : 1);
-  const flyDistanceCostKodiak = selectedAirport1.flyingFromKSTP * COST_PER_MILE.flyingKodiak * (ROUND_TRIP ? 2 : 1);
-  const flyNumDaysKodiak = Math.floor((flyHoursKodiak + hoursAtDest) / HOURS_ALLOWED_PER_DAY_FLYING);
-  const flyLodgingKodiak = (totalEmployees + 2) * (LODGING_PER_PERSON) * flyNumDaysKodiak; //technically we could just send the plane home. if(hoursAtDest > X) flyDistanceCostKingAir*=2
-  const flyTotalKodiak = flyDistanceCostKodiak + flyLodgingKodiak;
+  const flyHoursKodiak =
+    selectedAirport1.flyingFromKSTP / FLYING_SPEED_MPH.kodiak * (ROUND_TRIP ? 2 : 1);
+  const flyDistanceCostKodiak =
+    selectedAirport1.flyingFromKSTP * COST_PER_MILE.flyingKodiak * (ROUND_TRIP ? 2 : 1);
+  const flyNumDaysKodiak =
+    Math.floor((flyHoursKodiak + hoursAtDest) / HOURS_ALLOWED_PER_DAY_FLYING);
+  const flyLodgingKodiak =
+    (totalEmployees + 2) * (LODGING_PER_PERSON) * flyNumDaysKodiak; //technically we could just send the plane home. if(hoursAtDest > X) flyDistanceCostKingAir*=2
+  const flyTotalKodiak =
+    flyDistanceCostKodiak + flyLodgingKodiak;
 
   // Update Totals
   document.getElementById("drive-total").textContent = "$" + driveTotal.toLocaleString(undefined, {maximumFractionDigits: 0});
@@ -161,7 +182,7 @@ function calculateAndRender() {
 </tr>
 <tr class="total-row">
   <td><b>Employee Total</b></td><td></td>
-  <td>$${totalEmployeeCostPerHour.toLocaleString(undefined, {maximumFractionDigits: 2})}/hr</td>
+  <td><b>$${totalEmployeeCostPerHour.toLocaleString(undefined, {maximumFractionDigits: 2})}/hr</b></td>
 </tr>
 
 <tr><th colspan="3" style="text-align:center">Driving Costs</th></tr>
@@ -192,13 +213,13 @@ function calculateAndRender() {
 </tr>
 <tr class="total-row">
   <td colspan="2"><b>Total Driving</b></td>
-  <td>$${driveTotal.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+  <td><b>$${driveTotal.toLocaleString(undefined, {maximumFractionDigits: 0})}</b></td>
 </tr>
 
 <tr><th colspan="3" style="text-align:center">Flying Costs - King Air (Employee Hours NOT included)</th></tr>
 <tr>
   <td>Travel Hours</td>
-  <td>${selectedAirport1.flyingFromKSTP} miles each way ÷ ${FLYING_SPEED_MPH_KING_AIR} mph</td>
+  <td>${selectedAirport1.flyingFromKSTP} miles each way ÷ ${FLYING_SPEED_MPH.kingAir} mph</td>
   <td>${flyHoursKingAir.toFixed(2)} hrs</td>
 </tr>
 <tr>
@@ -213,13 +234,13 @@ function calculateAndRender() {
 </tr>
 <tr class="total-row">
   <td colspan="2"><b>Total Flying</b></td>
-  <td>$${flyTotalKingAir.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+  <td><b>$${flyTotalKingAir.toLocaleString(undefined, {maximumFractionDigits: 0})}</b></td>
 </tr>
 
 <tr><th colspan="3" style="text-align:center">Flying Costs - Kodiak (Employee Hours NOT included)</th></tr>
 <tr>
   <td>Travel Hours</td>
-  <td>${selectedAirport1.flyingFromKSTP} miles each way ÷ ${FLYING_SPEED_MPH_KODIAK} mph</td>
+  <td>${selectedAirport1.flyingFromKSTP} miles each way ÷ ${FLYING_SPEED_MPH.kodiak} mph</td>
   <td>${flyHoursKodiak.toFixed(2)} hrs</td>
 </tr>
 <tr>
@@ -234,7 +255,7 @@ function calculateAndRender() {
 </tr>
 <tr class="total-row">
   <td colspan="2"><b>Total Flying</b></td>
-  <td>$${flyTotalKodiak.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+  <td><b>$${flyTotalKodiak.toLocaleString(undefined, {maximumFractionDigits: 0})}</b></td>
 </tr>
   `;
 }
