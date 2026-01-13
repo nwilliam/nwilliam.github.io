@@ -93,11 +93,11 @@ function calculateAndRender() {
 
   // Employee cost per hour for driving only
   const costDirectors =
-    numDirectors * HOURLY_RATE.directors * PRC_FACTORS.directors;
+    numDirectors * ROLES.directors.hourlyRate * ROLES.directors.prcFactor;
   const costManagers =
-    numManagers * HOURLY_RATE.managers * PRC_FACTORS.managers;
+    numManagers * ROLES.managers.hourlyRate * ROLES.managers.prcFactor;
   const costGeneralists =
-    numGeneralists * HOURLY_RATE.generalists * PRC_FACTORS.generalists;
+    numGeneralists * ROLES.generalists.hourlyRate * ROLES.generalists.prcFactor;
   const totalEmployeeCostPerHour =
     costDirectors + costManagers + costGeneralists;
 
@@ -151,33 +151,33 @@ function calculateAndRender() {
   breakdownTable.innerHTML = `
 <tr><th colspan="3" style="text-align:center">Employee Costs (Travel Hours Only, Driving)</th></tr>
 <tr>
-  <td>Directors
+  <td>${ROLES.directors.label}
     <span class="tooltip-icon">
       <img alt="tooltip" src="/assets/icons/question-mark.svg"/>
-      <span class="tooltip-text">Average Director/P.E. cost per hour is $${HOURLY_RATE.directors.toFixed(2)}, includes the cost of benefits. MnDOT and PRC Aviation have determined that the value these individuals create is worth a factor of ${PRC_FACTORS.directors} times their salary. Thus, we multiply hourly cost times the PRC factor to calculate the cost per hour of having this individual driving a vehicle rather than working. ("Windshield Time")</span>
+      <span class="tooltip-text">Average Director/P.E. cost per hour is $${ROLES.directors.hourlyRate.toFixed(2)}, includes the cost of benefits. MnDOT and PRC Aviation have determined that the value these individuals create is worth a factor of ${ROLES.directors.prcFactor} times their salary. Thus, we multiply hourly cost times the PRC factor to calculate the cost per hour of having this individual driving a vehicle rather than working. ("Windshield Time")</span>
     </span>
   </td>
-  <td>${HOURLY_RATE.directors.toFixed(2)}/hr cost x ${PRC_FACTORS.directors} PRC Factor x ${numDirectors} directors traveling</td>
+  <td>${ROLES.directors.hourlyRate.toFixed(2)}/hr cost x ${ROLES.directors.prcFactor} PRC Factor x ${numDirectors} ${ROLES.directors.label} traveling</td>
   <td>$${costDirectors.toLocaleString(undefined, {maximumFractionDigits: 2})}/hr</td>
 </tr>
 <tr>
   <td>Managers
     <span class="tooltip-icon">
       <img alt="tooltip" src="/assets/icons/question-mark.svg"/>
-      <span class="tooltip-text">Average Manager/Supervisor/Professional cost per hour is $${HOURLY_RATE.managers.toFixed(2)}, includes the cost of benefits. MnDOT and PRC Aviation have determined that the value these individuals create is worth a factor of ${PRC_FACTORS.managers} their salary. Thus, we multiply hourly cost times the PRC factor to calculate the cost per hour of having this individual driving a vehicle rather than working. ("Windshield Time")</span>
+      <span class="tooltip-text">Average Manager/Supervisor/Professional cost per hour is $${ROLES.managers.hourlyRate.toFixed(2)}, includes the cost of benefits. MnDOT and PRC Aviation have determined that the value these individuals create is worth a factor of ${ROLES.managers.prcFactor} their salary. Thus, we multiply hourly cost times the PRC factor to calculate the cost per hour of having this individual driving a vehicle rather than working. ("Windshield Time")</span>
     </span>
   </td>
-  <td>${HOURLY_RATE.managers.toFixed(2)}/hr cost x ${PRC_FACTORS.managers} PRC Factor x ${numManagers} managers traveling</td>
+  <td>${ROLES.managers.hourlyRate.toFixed(2)}/hr cost x ${ROLES.managers.prcFactor} PRC Factor x ${numManagers} managers traveling</td>
   <td>$${costManagers.toLocaleString(undefined, {maximumFractionDigits: 2})}/hr</td>
 </tr>
 <tr>
   <td>Generalists
     <span class="tooltip-icon">
       <img alt="tooltip" src="/assets/icons/question-mark.svg"/>
-      <span class="tooltip-text">Average Generalist cost per hour is $${HOURLY_RATE.generalists.toFixed(2)}, includes the cost of benefits. MnDOT and PRC Aviation have determined that the value these individuals create is worth a factor of ${PRC_FACTORS.generalists} their salary. Thus, we multiply hourly cost times the PRC factor to calculate the cost per hour of having this individual driving a vehicle rather than working. ("Windshield Time")</span>
+      <span class="tooltip-text">Average Generalist cost per hour is $${ROLES.generalists.hourlyRate.toFixed(2)}, includes the cost of benefits. MnDOT and PRC Aviation have determined that the value these individuals create is worth a factor of ${ROLES.generalists.prcFactor} their salary. Thus, we multiply hourly cost times the PRC factor to calculate the cost per hour of having this individual driving a vehicle rather than working. ("Windshield Time")</span>
     </span>
   </td>
-  <td>${HOURLY_RATE.generalists.toFixed(2)}/hr cost x ${PRC_FACTORS.generalists} PRC Factor x ${numGeneralists} generalists traveling</td>
+  <td>${ROLES.generalists.hourlyRate.toFixed(2)}/hr cost x ${ROLES.generalists.prcFactor} PRC Factor x ${numGeneralists} generalists traveling</td>
   <td>$${costGeneralists.toLocaleString(undefined, {maximumFractionDigits: 2})}/hr</td>
 </tr>
 <tr class="total-row">
