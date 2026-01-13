@@ -3,6 +3,13 @@ let selectedAirport1 = null;
 const destInput = document.getElementById("dest1");
 const destList = document.getElementById("dest1-list");
 
+function clearResults() {
+  document.getElementById("drive-total").textContent = "$—";
+  document.getElementById("fly-total").textContent = "$—";
+  document.getElementById("breakdownTable").innerHTML =
+    `<tr><td colspan="3">Enter inputs to view calculation details.</td></tr>`;
+}
+
 function filterAirports(query) {
   query = query.toLowerCase();
   return AIRPORTS.filter(a =>
@@ -23,6 +30,7 @@ function renderAirportList(listEl, airports) {
       selectedAirport1 = ap;
       destInput.value = div.textContent;
       listEl.hidden = true;
+      calculateAndRender();
     });
     listEl.appendChild(div);
   });
@@ -43,14 +51,36 @@ destInput.addEventListener("input", () => {
   }, 200);
 });
 
+
 document.addEventListener("click", e => {
   if (!e.target.closest(".autocomplete-container")) destList.hidden = true;
 });
 
+//Here we catch all user inputs and more importantly, debounce them.
+const inputs = [
+  "directors",
+  "managers",
+  "generalists",
+  "hours1"
+].map(id => document.getElementById(id));
+
+let recalcTimer = null;
+
+function scheduleRecalc() {
+  clearTimeout(recalcTimer);
+  recalcTimer = setTimeout(calculateAndRender, 200);
+}
+
+inputs.forEach(input => {
+  input.addEventListener("input", scheduleRecalc);
+});
+
+
 // Calculation Logic
-document.getElementById("calculate").addEventListener("click", () => {
+function calculateAndRender() {
   if (!selectedAirport1) {
     alert("Select a valid destination airport.");
+    clearResults();
     return;
   }
 
@@ -192,4 +222,4 @@ document.getElementById("calculate").addEventListener("click", () => {
   <td>$${flyTotalKodiak.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
 </tr>
   `;
-});
+}
