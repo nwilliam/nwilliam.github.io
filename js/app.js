@@ -130,18 +130,33 @@ function calculateAndRender() {
   breakdownTable.innerHTML = `
 <tr><th colspan="3" style="text-align:center">Employee Costs (Travel Hours Only, Driving)</th></tr>
 <tr>
-  <td>Directors (${numDirectors})</td>
-  <td>${HOURLY_RATE.directors.toFixed(2)} /hr * ${PRC_FACTORS.directors} * ${numDirectors}</td>
+  <td>Directors
+    <span class="tooltip-icon">
+      <img alt="tooltip" src="/assets/icons/question-mark.svg"/>
+      <span class="tooltip-text">Average Director/P.E. cost per hour is $${HOURLY_RATE.directors.toFixed(2)}, includes the cost of benefits. MnDOT and PRC Aviation have determined that the value these individuals create is worth a factor of ${PRC_FACTORS.directors} times their salary. Thus, we multiply hourly cost times the PRC factor to calculate the cost per hour of having this individual driving a vehicle rather than working. ("Windshield Time")</span>
+    </span>
+  </td>
+  <td>${HOURLY_RATE.directors.toFixed(2)}/hr cost x ${PRC_FACTORS.directors} PRC Factor x ${numDirectors} directors traveling</td>
   <td>$${costDirectors.toLocaleString(undefined, {maximumFractionDigits: 2})}/hr</td>
 </tr>
 <tr>
-  <td>Managers (${numManagers})</td>
-  <td>${HOURLY_RATE.managers.toFixed(2)} /hr * ${PRC_FACTORS.managers} * ${numManagers}</td>
+  <td>Managers
+    <span class="tooltip-icon">
+      <img alt="tooltip" src="/assets/icons/question-mark.svg"/>
+      <span class="tooltip-text">Average Manager/Supervisor/Professional cost per hour is $${HOURLY_RATE.managers.toFixed(2)}, includes the cost of benefits. MnDOT and PRC Aviation have determined that the value these individuals create is worth a factor of ${PRC_FACTORS.managers} their salary. Thus, we multiply hourly cost times the PRC factor to calculate the cost per hour of having this individual driving a vehicle rather than working. ("Windshield Time")</span>
+    </span>
+  </td>
+  <td>${HOURLY_RATE.managers.toFixed(2)}/hr cost x ${PRC_FACTORS.managers} PRC Factor x ${numManagers} managers traveling</td>
   <td>$${costManagers.toLocaleString(undefined, {maximumFractionDigits: 2})}/hr</td>
 </tr>
 <tr>
-  <td>Generalists (${numGeneralists})</td>
-  <td>${HOURLY_RATE.generalists.toFixed(2)} /hr * ${PRC_FACTORS.generalists} * ${numGeneralists}</td>
+  <td>Generalists
+    <span class="tooltip-icon">
+      <img alt="tooltip" src="/assets/icons/question-mark.svg"/>
+      <span class="tooltip-text">Average Generalist cost per hour is $${HOURLY_RATE.generalists.toFixed(2)}, includes the cost of benefits. MnDOT and PRC Aviation have determined that the value these individuals create is worth a factor of ${PRC_FACTORS.generalists} their salary. Thus, we multiply hourly cost times the PRC factor to calculate the cost per hour of having this individual driving a vehicle rather than working. ("Windshield Time")</span>
+    </span>
+  </td>
+  <td>${HOURLY_RATE.generalists.toFixed(2)}/hr cost x ${PRC_FACTORS.generalists} PRC Factor x ${numGeneralists} generalists traveling</td>
   <td>$${costGeneralists.toLocaleString(undefined, {maximumFractionDigits: 2})}/hr</td>
 </tr>
 <tr class="total-row">
@@ -183,7 +198,7 @@ function calculateAndRender() {
 <tr><th colspan="3" style="text-align:center">Flying Costs - King Air (Employee Hours NOT included)</th></tr>
 <tr>
   <td>Travel Hours</td>
-  <td>${selectedAirport1.flyingFromKSTP} miles each way / ${FLYING_SPEED_MPH_KING_AIR} mph</td>
+  <td>${selectedAirport1.flyingFromKSTP} miles each way ÷ ${FLYING_SPEED_MPH_KING_AIR} mph</td>
   <td>${flyHoursKingAir.toFixed(2)} hrs</td>
 </tr>
 <tr>
@@ -204,7 +219,7 @@ function calculateAndRender() {
 <tr><th colspan="3" style="text-align:center">Flying Costs - Kodiak (Employee Hours NOT included)</th></tr>
 <tr>
   <td>Travel Hours</td>
-  <td>${selectedAirport1.flyingFromKSTP} miles each way / ${FLYING_SPEED_MPH_KODIAK} mph</td>
+  <td>${selectedAirport1.flyingFromKSTP} miles each way ÷ ${FLYING_SPEED_MPH_KODIAK} mph</td>
   <td>${flyHoursKodiak.toFixed(2)} hrs</td>
 </tr>
 <tr>
