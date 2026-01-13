@@ -5,7 +5,7 @@ const AIRPORTS = [
   { name:"Brainerd Lakes Regional Airport", icao:"KBRD", iata:"BRD", faa:"BRD", lat:46.3984, lon:-94.1351, flyingFromKSTP:147, drivingFromKSTP:165 },
   { name:"Duluth International Airport", icao:"KDLH", iata:"DLH", faa:"DLH", lat:46.8421, lon:-92.1936, flyingFromKSTP:158, drivingFromKSTP:184 },
   { name:"Rochester International Airport", icao:"KRST", iata:"RST", faa:"RST", lat:43.9088, lon:-92.4983, flyingFromKSTP:128, drivingFromKSTP:155 },
-  { name:"St Cloud Regional Airport", icao:"KSTC", iata:"STC", faa:"STC", lat:45.5466, lon:-94.0599, flyingFromKSTP:76, drivingFromKSTP:88 },
+  { name:"St Cloud Regional Airport", icao:"KSTC", iata:"STC", faa:"STC", lat:45.5466, lon:-94.0599, flyingFromKSTP:65, drivingFromKSTP:73 },
   { name:"Minot International Airport", icao:"KMOT", iata:"MOT", faa:"MOT", lat:48.2597, lon:-101.2808, flyingFromKSTP:455, drivingFromKSTP:525 },
   { name:"Hector International Airport", icao:"KFAR", iata:"FAR", faa:"FAR", lat:46.9208, lon:-96.8156, flyingFromKSTP:237, drivingFromKSTP:294 },
   { name:"Dane County Regional Airport", icao:"KMSN", iata:"MSN", faa:"MSN", lat:43.1396, lon:-89.3378, flyingFromKSTP:260, drivingFromKSTP:300 },
