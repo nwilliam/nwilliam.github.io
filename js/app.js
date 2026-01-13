@@ -76,16 +76,24 @@ document.getElementById("calculate").addEventListener("click", () => {
   const driveEmployeeTotal = totalEmployeeCostPerHour * driveHours;
   const driveTotal = driveEmployeeTotal + driveDistanceCost + driveLodging;
 
-  // Flying
-  const flyHours = selectedAirport1.flyingFromKSTP / FLYING_SPEED_MPH * (ROUND_TRIP ? 2 : 1);
-  const flyDistanceCost = selectedAirport1.flyingFromKSTP * COST_PER_MILE.flying * (ROUND_TRIP ? 2 : 1);
-  const flyNumDays = Math.floor((flyHours + hoursAtDest) / HOURS_ALLOWED_PER_DAY_FLYING);
-  const flyLodging = (totalEmployees + 2) * (LODGING_PER_PERSON) * flyNumDays; //technically we could just send the plane home. if(hoursAtDest > X) flyDistanceCost*=2
-  const flyTotal = flyDistanceCost + flyLodging;
+  // Flying - King Air
+  const flyHoursKingAir = selectedAirport1.flyingFromKSTP / FLYING_SPEED_MPH_KING_AIR * (ROUND_TRIP ? 2 : 1);
+  const flyDistanceCostKingAir = selectedAirport1.flyingFromKSTP * COST_PER_MILE.flyingKingAir * (ROUND_TRIP ? 2 : 1);
+  const flyNumDaysKingAir = Math.floor((flyHoursKingAir + hoursAtDest) / HOURS_ALLOWED_PER_DAY_FLYING);
+  const flyLodgingKingAir = (totalEmployees + 2) * (LODGING_PER_PERSON) * flyNumDaysKingAir; //technically we could just send the plane home. if(hoursAtDest > X) flyDistanceCostKingAir*=2
+  const flyTotalKingAir = flyDistanceCostKingAir + flyLodgingKingAir;
+
+  // Flying - Kodiak
+  const flyHoursKodiak = selectedAirport1.flyingFromKSTP / FLYING_SPEED_MPH_KODIAK * (ROUND_TRIP ? 2 : 1);
+  const flyDistanceCostKodiak = selectedAirport1.flyingFromKSTP * COST_PER_MILE.flyingKodiak * (ROUND_TRIP ? 2 : 1);
+  const flyNumDaysKodiak = Math.floor((flyHoursKodiak + hoursAtDest) / HOURS_ALLOWED_PER_DAY_FLYING);
+  const flyLodgingKodiak = (totalEmployees + 2) * (LODGING_PER_PERSON) * flyNumDaysKodiak; //technically we could just send the plane home. if(hoursAtDest > X) flyDistanceCostKingAir*=2
+  const flyTotalKodiak = flyDistanceCostKodiak + flyLodgingKodiak;
 
   // Update Totals
   document.getElementById("drive-total").textContent = "$" + driveTotal.toLocaleString(undefined, {maximumFractionDigits: 0});
-  document.getElementById("fly-total").textContent = "$" + flyTotal.toLocaleString(undefined, {maximumFractionDigits: 0});
+  document.getElementById("fly-total").textContent = "$" + flyTotalKingAir.toLocaleString(undefined, {maximumFractionDigits: 0});
+  document.getElementById("fly-total-kodiak").textContent = "$" + flyTotalKodiak.toLocaleString(undefined, {maximumFractionDigits: 0});
 
   // --- Breakdown Table ---
   const breakdownTable = document.getElementById("breakdownTable");
@@ -142,25 +150,46 @@ document.getElementById("calculate").addEventListener("click", () => {
   <td>$${driveTotal.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
 </tr>
 
-<tr><th colspan="3" style="text-align:center">Flying Costs (Employee Hours NOT included)</th></tr>
+<tr><th colspan="3" style="text-align:center">Flying Costs - King Air (Employee Hours NOT included)</th></tr>
 <tr>
   <td>Travel Hours</td>
-  <td>${selectedAirport1.flyingFromKSTP} miles each way / ${FLYING_SPEED_MPH} mph</td>
-  <td>${flyHours.toFixed(2)} hrs</td>
+  <td>${selectedAirport1.flyingFromKSTP} miles each way / ${FLYING_SPEED_MPH_KING_AIR} mph</td>
+  <td>${flyHoursKingAir.toFixed(2)} hrs</td>
 </tr>
 <tr>
   <td>Distance Cost</td>
-  <td>${selectedAirport1.flyingFromKSTP} mi * $${COST_PER_MILE.flying} * ${ROUND_TRIP ? 2 : 1}</td>
-  <td>$${flyDistanceCost.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+  <td>${selectedAirport1.flyingFromKSTP} mi * $${COST_PER_MILE.flyingKingAir} * ${ROUND_TRIP ? 2 : 1}</td>
+  <td>$${flyDistanceCostKingAir.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
 </tr>
 <tr>
   <td>Lodging & Meals</td>
   <td>+$${LODGING_PER_PERSON} per person including 2 pilots + $${PILOT_LODGING} pilot lodging if travel hours + destination hours > ${HOURS_ALLOWED_PER_DAY_FLYING}</td>
-  <td>$${flyLodging.toLocaleString()}</td>
+  <td>$${flyLodgingKingAir.toLocaleString()}</td>
 </tr>
 <tr class="total-row">
   <td colspan="2"><b>Total Flying</b></td>
-  <td>$${flyTotal.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+  <td>$${flyTotalKingAir.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+</tr>
+
+<tr><th colspan="3" style="text-align:center">Flying Costs - Kodiak (Employee Hours NOT included)</th></tr>
+<tr>
+  <td>Travel Hours</td>
+  <td>${selectedAirport1.flyingFromKSTP} miles each way / ${FLYING_SPEED_MPH_KODIAK} mph</td>
+  <td>${flyHoursKodiak.toFixed(2)} hrs</td>
+</tr>
+<tr>
+  <td>Distance Cost</td>
+  <td>${selectedAirport1.flyingFromKSTP} mi * $${COST_PER_MILE.flyingKodiak} * ${ROUND_TRIP ? 2 : 1}</td>
+  <td>$${flyDistanceCostKodiak.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+</tr>
+<tr>
+  <td>Lodging & Meals</td>
+  <td>+$${LODGING_PER_PERSON} per person including 2 pilots + $${PILOT_LODGING} pilot lodging if travel hours + destination hours > ${HOURS_ALLOWED_PER_DAY_FLYING}</td>
+  <td>$${flyLodgingKodiak.toLocaleString()}</td>
+</tr>
+<tr class="total-row">
+  <td colspan="2"><b>Total Flying</b></td>
+  <td>$${flyTotalKodiak.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
 </tr>
   `;
 });
