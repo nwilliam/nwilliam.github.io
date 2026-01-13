@@ -213,3 +213,34 @@ th {
   opacity: 1;
 }
 
+    /* FAQ Section Styles */
+    .faq-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .faq-question {
+      font-weight: bold;
+      color: var(--mndot-blue);
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+    }
+
+    .faq-answer {
+      color: var(--mndot-gray-900);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .faq-answer p {
+      margin: 0 0 0.5rem 0;
+    }
+
+    .faq-answer ul {
+      margin: 0.5rem 0;
+      padding-left: 1.25rem;
+    }
+
+    .faq-answer li {
+      margin-bottom: 0.4rem;
+    }
+
