@@ -134,7 +134,7 @@ document.getElementById("calculate").addEventListener("click", () => {
 </tr>
 <tr>
   <td>Lodging & Meals</td>
-  <td>+$${LODGING_PER_PERSON} per person if travel + destination hours > 8</td>
+  <td>+$${LODGING_PER_PERSON} per person if travel + destination hours > ${HOURS_ALLOWED_PER_DAY}</td>
   <td>$${driveLodging.toLocaleString()}</td>
 </tr>
 <tr class="total-row">
@@ -155,7 +155,7 @@ document.getElementById("calculate").addEventListener("click", () => {
 </tr>
 <tr>
   <td>Lodging & Meals</td>
-  <td>+$${LODGING_PER_PERSON} per person including 2 pilots + $${PILOT_LODGING} pilot lodging if travel hours + destination hours > 12</td>
+  <td>+$${LODGING_PER_PERSON} per person including 2 pilots + $${PILOT_LODGING} pilot lodging if travel hours + destination hours > ${HOURS_ALLOWED_PER_DAY_FLYING}</td>
   <td>$${flyLodging.toLocaleString()}</td>
 </tr>
 <tr class="total-row">
