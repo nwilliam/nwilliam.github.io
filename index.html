@@ -18,7 +18,7 @@
     <h2>Trip Information</h2>
     <div class="form-grid">
       <div>
-        <label>Office Directors / District Engineers</label>
+        <label for="directors">Office Directors / District Engineers</label>
         <input id="directors" min="0" type="number" value="0">
         <div class="hint">
           <span class="tooltip-icon"><img alt="tooltip"
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div>
-        <label>Managers / Supervisors / Professionals</label>
+        <label for="managers">Managers / Supervisors / Professionals</label>
         <input id="managers" min="0" type="number" value="0">
         <div class="hint">
           <span class="tooltip-icon"><img alt="tooltip"
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div>
-        <label>Transportation Generalists</label>
+        <label for="generalists">Transportation Generalists</label>
         <input id="generalists" min="0" type="number" value="0">
         <div class="hint">
           <span class="tooltip-icon"><img alt="tooltip"
@@ -60,14 +60,14 @@
       </div>
 
       <div class="autocomplete-container">
-        <label>Destination Airport</label>
+        <label for="dest1">Destination Airport</label>
         <input autocomplete="off" id="dest1" placeholder="Enter ICAO, IATA, FAA code, or airport name" type="text">
         <div class="autocomplete-list" hidden id="dest1-list"></div>
         <div class="hint">Start typing to see matching airports</div>
       </div>
 
       <div>
-        <label>Hours at Destination</label>
+        <label for="hours1">Hours at Destination</label>
         <input id="hours1" min="0" type="number" value="0">
       </div>
     </div>

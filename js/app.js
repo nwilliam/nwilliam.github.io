@@ -62,9 +62,9 @@ document.getElementById("calculate").addEventListener("click", () => {
   const totalEmployees = numDirectors + numManagers + numGeneralists;
 
   // Employee cost per hour for driving only
-  const costDirectors = numDirectors * BASE_HOURLY_RATE * PRC_FACTORS.directors;
-  const costManagers = numManagers * BASE_HOURLY_RATE * PRC_FACTORS.managers;
-  const costGeneralists = numGeneralists * BASE_HOURLY_RATE * PRC_FACTORS.generalists;
+  const costDirectors = numDirectors * HOURLY_RATE.directors * PRC_FACTORS.directors;
+  const costManagers = numManagers * HOURLY_RATE.managers * PRC_FACTORS.managers;
+  const costGeneralists = numGeneralists * HOURLY_RATE.generalists * PRC_FACTORS.generalists;
   const totalEmployeeCostPerHour = costDirectors + costManagers + costGeneralists;
 
   // Driving
@@ -93,17 +93,17 @@ document.getElementById("calculate").addEventListener("click", () => {
 <tr><th colspan="3" style="text-align:center">Employee Costs (Travel Hours Only, Driving)</th></tr>
 <tr>
   <td>Directors (${numDirectors})</td>
-  <td>${BASE_HOURLY_RATE.toFixed(2)} /hr * ${PRC_FACTORS.directors} * ${numDirectors}</td>
+  <td>${HOURLY_RATE.directors.toFixed(2)} /hr * ${PRC_FACTORS.directors} * ${numDirectors}</td>
   <td>$${costDirectors.toLocaleString(undefined, {maximumFractionDigits: 2})}/hr</td>
 </tr>
 <tr>
   <td>Managers (${numManagers})</td>
-  <td>${BASE_HOURLY_RATE.toFixed(2)} /hr * ${PRC_FACTORS.managers} * ${numManagers}</td>
+  <td>${HOURLY_RATE.managers.toFixed(2)} /hr * ${PRC_FACTORS.managers} * ${numManagers}</td>
   <td>$${costManagers.toLocaleString(undefined, {maximumFractionDigits: 2})}/hr</td>
 </tr>
 <tr>
   <td>Generalists (${numGeneralists})</td>
-  <td>${BASE_HOURLY_RATE.toFixed(2)} /hr * ${PRC_FACTORS.generalists} * ${numGeneralists}</td>
+  <td>${HOURLY_RATE.generalists.toFixed(2)} /hr * ${PRC_FACTORS.generalists} * ${numGeneralists}</td>
   <td>$${costGeneralists.toLocaleString(undefined, {maximumFractionDigits: 2})}/hr</td>
 </tr>
 <tr class="total-row">

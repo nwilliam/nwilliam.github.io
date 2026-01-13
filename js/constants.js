@@ -1,4 +1,8 @@
-const BASE_HOURLY_RATE = 51.43;
+const HOURLY_RATE = {
+  directors: 86.53,
+  managers: 67.46,
+  generalists: 51.40
+};
 
 const PRC_FACTORS = {
   directors: 5.7,
