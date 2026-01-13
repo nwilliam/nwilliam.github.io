@@ -144,6 +144,11 @@ document.getElementById("calculate").addEventListener("click", () => {
 
 <tr><th colspan="3" style="text-align:center">Flying Costs (Employee Hours NOT included)</th></tr>
 <tr>
+  <td>Travel Hours</td>
+  <td>${selectedAirport1.flyingFromKSTP} miles each way / ${FLYING_SPEED_MPH} mph</td>
+  <td>${flyHours.toFixed(2)} hrs</td>
+</tr>
+<tr>
   <td>Distance Cost</td>
   <td>${selectedAirport1.flyingFromKSTP} mi * $${COST_PER_MILE.flying} * ${ROUND_TRIP ? 2 : 1}</td>
   <td>$${flyDistanceCost.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
