@@ -28,7 +28,7 @@ function totalRow(label, value) {
 function tooltip(text) {
   return `
     <span class="tooltip-icon">
-      <img alt="tooltip" src="/assets/icons/question-mark.svg"/>
+      <img alt="tooltip" src="assets/icons/question-mark.svg"/>
       <span class="tooltip-text">${text}</span>
     </span>
   `;
