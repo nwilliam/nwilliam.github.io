@@ -8,13 +8,13 @@ document.getElementById("directors-label").textContent = `${ROLES.directors.full
 document.getElementById("managers-label").textContent = `${ROLES.managers.fullLabel}`;
 document.getElementById("generalists-label").textContent = `${ROLES.generalists.fullLabel}`;
 document.getElementById("directors-tooltip").innerHTML = `${tooltip(`Each level of employee has a different
- level of value that they bring to MnDOT, which requires them to be separated for calculation purposes. For calculation
+ level of value that they create for MnDOT, which requires them to be separated for calculation purposes. For calculation
  purposes only, ${ROLES.directors.shortLabel} have a rough yearly income greater than $${ROLES.directors.baseAvgYearly}.`)}`
 document.getElementById("managers-tooltip").innerHTML = `${tooltip(`Each level of employee has a different
- level of value that they bring to MnDOT, which requires them to be separated for calculation purposes. For calculation
+ level of value that they create for MnDOT, which requires them to be separated for calculation purposes. For calculation
  purposes only, ${ROLES.managers.shortLabel} have a rough yearly income of between $${ROLES.managers.baseAvgYearly} and $${ROLES.directors.baseAvgYearly}.`)}`
 document.getElementById("generalists-tooltip").innerHTML = `${tooltip(`Each level of employee has a different
- level of value that they bring to MnDOT, which requires them to be separated for calculation purposes. For calculation
+ level of value that they create for MnDOT, which requires them to be separated for calculation purposes. For calculation
  purposes only, ${ROLES.generalists.shortLabel} have a rough yearly income of less than $${ROLES.managers.baseAvgYearly}.`)}`
 
 function clearResults() {
