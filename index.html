@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -30,24 +30,92 @@
     <div class="form-grid">
       <div>
         <label>Departure Airport</label>
-        <div class="static-field">KSTP – St. Paul Downtown / Holman Field</div>
-        <!--<div class="hint">Round trip origin and return airport</div>-->
+        <div class="static-field">KSTP - St. Paul Downtown / Holman Field</div>
+
       </div>
 
       <div class="autocomplete-container">
         <label for="dest1">Destination Airport</label>
-        <input autocomplete="off" id="dest1" placeholder="Enter ICAO, FAA code, or airport name" type="text">
-        <div class="autocomplete-list" hidden id="dest1-list"></div>
-        <!--<div class="hint">Start typing to see matching airports</div>-->
+        <div class="autocomplete-field">
+          <input autocomplete="off" id="dest1" placeholder="Enter ICAO, FAA code, or airport name" type="text">
+          <div class="autocomplete-list" hidden id="dest1-list"></div>
+        </div>
+        <div class="field-error" id="dest1-error" hidden aria-live="polite"></div>
+
       </div>
 
-      <div>
-        <label for="hours1">Hours at Destination</label>
-        <input id="hours1" min="0" type="number" value="0">
+      <div class="datetime-range">
+        <div class="datetime-row datetime-picker">
+          <label for="arrival-display">Arrival</label>
+          <input
+            id="arrival-display"
+            class="datetime-input"
+            type="text"
+            placeholder="Select date/time"
+            readonly
+            aria-haspopup="dialog"
+            aria-expanded="false"
+          >
+          <input id="arrival-datetime" type="hidden">
+          <div class="datetime-popover" id="arrival-popover" role="dialog" aria-modal="false" hidden>
+            <div class="calendar-view">
+              <div class="datetime-header">
+                <button class="nav-btn prev" type="button" aria-label="Previous month">&lt;</button>
+                <div class="month-label"></div>
+                <button class="nav-btn next" type="button" aria-label="Next month">&gt;</button>
+              </div>
+              <div class="weekday-row">
+                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+              </div>
+              <div class="calendar-grid"></div>
+            </div>
+            <div class="time-view" hidden>
+              <div class="time-header"></div>
+              <div class="time-grid"></div>
+              <div class="picker-actions">
+                <button class="back-btn" type="button">Back</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="datetime-row datetime-picker">
+          <label for="departure-display">Departure</label>
+          <input
+            id="departure-display"
+            class="datetime-input"
+            type="text"
+            placeholder="Select date/time"
+            readonly
+            aria-haspopup="dialog"
+            aria-expanded="false"
+          >
+          <input id="departure-datetime" type="hidden">
+          <div class="field-error" id="departure-error" hidden aria-live="polite"></div>
+          <div class="datetime-popover" id="departure-popover" role="dialog" aria-modal="false" hidden>
+            <div class="calendar-view">
+              <div class="datetime-header">
+                <button class="nav-btn prev" type="button" aria-label="Previous month">&lt;</button>
+                <div class="month-label"></div>
+                <button class="nav-btn next" type="button" aria-label="Next month">&gt;</button>
+              </div>
+              <div class="weekday-row">
+                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+              </div>
+              <div class="calendar-grid"></div>
+            </div>
+            <div class="time-view" hidden>
+              <div class="time-header"></div>
+              <div class="time-grid"></div>
+              <div class="picker-actions">
+                <button class="back-btn" type="button">Back</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="form-grid" style="margin-top:1rem;">
+    <div class="form-grid form-grid-spaced">
       <div>
         <label id="directors-label" for="directors"></label>
         <span id="directors-tooltip"></span>
@@ -64,9 +132,7 @@
         <input id="generalists" min="0" type="number" value="0">
       </div>
     </div>
-    <!--<div style="margin-top:1rem;">
-      <button id="calculate">Calculate</button>
-    </div>-->
+
   </section>
 
   <section>
@@ -75,17 +141,17 @@
       <div class="result-card">
         <h3>Driving</h3>
         <div>Total Round-Trip Cost</div>
-        <div class="total" id="drive-total">$—</div>
+        <div class="total" id="drive-total">$--</div>
       </div>
       <div class="result-card">
-        <h3>Flying – King Air</h3>
+        <h3>Flying - King Air</h3>
         <div>Total Round-Trip Cost</div>
-        <div class="total" id="fly-total">$—</div>
+        <div class="total" id="fly-total">$--</div>
       </div>
       <div class="result-card">
-        <h3>Flying – Kodiak</h3>
+        <h3>Flying - Kodiak</h3>
         <div>Total Round-Trip Cost</div>
-        <div class="total" id="fly-total-kodiak">$—</div>
+        <div class="total" id="fly-total-kodiak">$--</div>
       </div>
     </div>
   </section>
@@ -93,13 +159,7 @@
   <section>
     <h2>Calculation Breakdown</h2>
     <table>
-      <!--<thead>
-      <tr>
-        <th>Item</th>
-        <th>Formula</th>
-        <th>Value</th>
-      </tr>
-      </thead>-->
+
       <tbody id="breakdownTable">
       <tr>
         <td colspan="3">Enter Trip Information to view calculation details.</td>
@@ -208,6 +268,13 @@
 
 <script src="js/constants.js"></script>
 <script src="js/airports.js"></script>
+<script src="js/ui-helpers.js"></script>
+<script src="js/form-errors.js"></script>
+<script src="js/dom-cache.js"></script>
+<script src="js/autocomplete.js"></script>
+<script src="js/calculations.js"></script>
+<script src="js/breakdown-render.js"></script>
+<script src="js/date-time-picker.js"></script>
 <script src="js/app.js"></script>
 
 <script>

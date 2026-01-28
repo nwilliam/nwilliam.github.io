@@ -7,6 +7,10 @@
   --border-color: #d0d0d0;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   font-family: "Brandon Grotesque", "Open Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
@@ -78,9 +82,19 @@ section h2 {
   gap: 1rem;
 }
 
+.form-grid-spaced {
+  margin-top: 1rem;
+}
+
 label {
   font-weight: 600;
   font-size: 0.9rem;
+}
+
+.field-error {
+  margin-top: 0.35rem;
+  color: #b00020;
+  font-size: 0.85rem;
 }
 
 input, select {
@@ -102,12 +116,11 @@ input, select {
   font-size: 0.9rem;
 }
 
-.hint {
-  font-size: 0.9rem;
-  color: var(--mndot-gray-700);
+.autocomplete-container {
+  position: relative;
 }
 
-.autocomplete-container {
+.autocomplete-field {
   position: relative;
 }
 
@@ -132,6 +145,149 @@ input, select {
 
 .autocomplete-item:hover {
   background: var(--mndot-gray-100);
+}
+
+.datetime-range {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.datetime-row {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.datetime-picker {
+  position: relative;
+}
+
+.datetime-input {
+  cursor: pointer;
+  background: white;
+}
+
+.datetime-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: min(340px, 100%);
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  padding: 0.75rem;
+  z-index: 1200;
+}
+
+.datetime-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--mndot-blue);
+}
+
+.nav-btn {
+  border: 1px solid var(--border-color);
+  background: white;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.weekday-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.2rem;
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--mndot-gray-700);
+  margin-bottom: 0.35rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.2rem;
+}
+
+.calendar-grid .empty {
+  height: 32px;
+}
+
+.day-btn {
+  border: 1px solid transparent;
+  background: white;
+  border-radius: 4px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.day-btn:hover {
+  border-color: var(--border-color);
+  background: var(--mndot-gray-100);
+}
+
+.day-btn.selected {
+  background: var(--mndot-blue);
+  color: white;
+}
+
+.day-btn.today {
+  border-color: var(--mndot-blue);
+}
+
+.time-view {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.time-header {
+  font-weight: 600;
+  color: var(--mndot-blue);
+}
+
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.35rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.time-btn {
+  border: 1px solid var(--border-color);
+  background: white;
+  border-radius: 4px;
+  padding: 0.35rem 0.4rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.time-btn:hover {
+  background: var(--mndot-gray-100);
+}
+
+.time-btn.selected {
+  background: var(--mndot-blue);
+  color: white;
+}
+
+.picker-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.back-btn {
+  border: 1px solid var(--border-color);
+  background: white;
+  border-radius: 4px;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
 }
 
 .results-grid {
@@ -171,6 +327,10 @@ th, td {
 
 th {
   background: var(--mndot-gray-100);
+}
+
+.table-section-header {
+  text-align: center;
 }
 
 /* Tooltip styling */
