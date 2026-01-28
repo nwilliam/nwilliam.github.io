@@ -95,10 +95,10 @@ inputs.forEach(input => {
   input.addEventListener("input", scheduleRecalc);
 });
 
+
 // Calculation Logic
 function calculateAndRender() {
   if (!selectedAirport1) {
-    alert("Select a valid destination airport.");
     clearResults();
     return;
   }
@@ -229,7 +229,7 @@ function calculateAndRender() {
   <tr>
     <td>Lodging & Meals
         ${tooltip(`If the total hours is greater than a standard workday of ${HOURS_ALLOWED_PER_DAY} hours, employees are assumed to be reimbursed for an overnight stay including lodging and meals.\n\nThis cost is $${ACCOMMODATIONS_PER_PERSON} per person and is based on $120 lodging cost please three meals reimbursed at $11, $13, and $19.`)}</td>
-    <td>$${ACCOMMODATIONS_PER_PERSON} per person lodging and meals x ${totalEmployees} total employees</td>
+    <td>$${ACCOMMODATIONS_PER_PERSON} per person lodging and meals x ${totalEmployees} total employees x ${numDays} overnights</td>
     <td>$${driveLodging.toLocaleString()}</td>
   </tr>
   <tr class="total-row">
@@ -255,7 +255,7 @@ function calculateAndRender() {
   <tr>
     <td>Lodging & Meals
        ${tooltip(`If the total hours is greater than ${HOURS_ALLOWED_PER_DAY_FLYING} hours, employees are reimbursed for an overnight stay including lodging and meals, and the two pilots' worth of lodging and meals is added to the cost.\n\nThis cost is $${ACCOMMODATIONS_PER_PERSON} per person and is based on $120 lodging cost plus three meals reimbursed at $11, $13, and $19.\n\n12 hours is used for calculating flying as employees are not required to be active during the return trip.`)}
-    <td>$${ACCOMMODATIONS_PER_PERSON} per person lodging and meals x ${totalEmployees + 2} total employees (including pilots)</td>
+    <td>$${ACCOMMODATIONS_PER_PERSON} per person lodging and meals x ${totalEmployees + 2} total employees (including pilots) x ${flyNumDaysKingAir} overnights</td>
     <td>$${flyLodgingKingAir.toLocaleString()}</td>
   </tr>
   <tr class="total-row">
@@ -281,7 +281,7 @@ function calculateAndRender() {
   <tr>
     <td>Lodging & Meals
     ${tooltip(`If the total hours is greater than ${HOURS_ALLOWED_PER_DAY_FLYING} hours, employees are reimbursed for an overnight stay including lodging and meals, and the two pilots' worth of lodging and meals is added to the cost.\n\nThis cost is $${ACCOMMODATIONS_PER_PERSON} per person and is based on $120 lodging cost plus three meals reimbursed at $11, $13, and $19.\n\n12 hours is used for calculating flying as employees are not required to be active during the return trip.`)}</td>
-    <td>$${ACCOMMODATIONS_PER_PERSON} per person lodging and meals x ${totalEmployees + 2} total employees (including pilots)</td>
+    <td>$${ACCOMMODATIONS_PER_PERSON} per person lodging and meals x ${totalEmployees + 2} total employees (including pilots) x ${flyNumDaysKodiak} overnights</td>
     <td>$${flyLodgingKodiak.toLocaleString()}</td>
   </tr>
   <tr class="total-row">
@@ -289,4 +289,4 @@ function calculateAndRender() {
     <td><b>$${flyTotalKodiak.toLocaleString(undefined, {maximumFractionDigits: 0})}</b></td>
   </tr>
     `;
-  }
+}
