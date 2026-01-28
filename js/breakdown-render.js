@@ -1,4 +1,4 @@
-const renderBreakdownTable = (dom, data, airport, inputs) => {
+const renderBreakdownTable = (dom, data, trip, inputs) => {
   const {
     numDirectors,
     numManagers,
@@ -35,9 +35,9 @@ const renderBreakdownTable = (dom, data, airport, inputs) => {
   <tr><th colspan="3" class="table-section-header">Driving Costs</th></tr>
   <tr>
     <td>Travel Hours
-        ${tooltip(`Average travel time from KSTP to ${airport.name} airport, in hours\n\nMileage is derived using MapQuest API to calculate actual driving distances with an average driving speed of ${DRIVING_SPEED_MPH} mph.`)}
+        ${tooltip(`Average travel time for ${trip.label}, in hours\n\nMileage is derived using total driving miles with an average driving speed of ${DRIVING_SPEED_MPH} mph.`)}
     </td>
-    <td>${airport.drivingFromKSTP * (ROUND_TRIP ? 2 : 1)} ${ROUND_TRIP ? `total round-trip miles` : `miles`} / ${DRIVING_SPEED_MPH} mph</td>
+    <td>${trip.driveMiles.toFixed(1)} total miles / ${DRIVING_SPEED_MPH} mph</td>
     <td>${data.driveHours.toFixed(2)} hrs</td>
   </tr>
   <tr>
@@ -54,7 +54,7 @@ const renderBreakdownTable = (dom, data, airport, inputs) => {
   </tr>
   <tr>
     <td>Vehicle Cost</td>
-    <td>${airport.drivingFromKSTP * (ROUND_TRIP ? 2 : 1)} miles x $${COST_PER_MILE.driving}/mile x ${data.carsNeeded} vehicles</td>
+    <td>${trip.driveMiles.toFixed(1)} miles x $${COST_PER_MILE.driving}/mile x ${data.carsNeeded} vehicles</td>
     <td>$${data.driveDistanceCost.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
   </tr>
   <tr>
@@ -71,16 +71,16 @@ const renderBreakdownTable = (dom, data, airport, inputs) => {
   <tr><th colspan="3" class="table-section-header">Flying Costs - King Air</th></tr>
   <tr>
     <td>Travel Hours
-      ${tooltip(`Average travel time from KSTP to ${airport.name} airport, in hours\n\nMileage is derived using the air distance from latitude and longitude coordinates with an average flight speed of ${FLYING_SPEED_MPH.kingAir} mph.`)}
+      ${tooltip(`Average travel time for ${trip.label}, in hours\n\nMileage is derived using total air miles with an average flight speed of ${FLYING_SPEED_MPH.kingAir} mph.`)}
     </td>
-    <td>${airport.flyingFromKSTP * (ROUND_TRIP ? 2 : 1)} ${ROUND_TRIP ? `total round-trip miles` : `miles`} / ${FLYING_SPEED_MPH.kingAir} mph</td>
+    <td>${trip.flyMiles.toFixed(1)} total miles / ${FLYING_SPEED_MPH.kingAir} mph</td>
     <td>${data.flyHoursKingAir.toFixed(2)} hrs</td>
   </tr>
   <tr>
     <td>Aircraft Cost
       ${tooltip(`The cost per flight mile of the King Air aircraft is derived by adding together both the fixed and variable costs of operating the aircraft over the preceding year and dividing by the total mileage flown. This gives an average cost per mile of $${COST_PER_MILE.flyingKingAir} to operate this aircraft and is updated yearly.`)}
     </td>
-    <td>${airport.flyingFromKSTP * (ROUND_TRIP ? 2 : 1)} miles x $${COST_PER_MILE.flyingKingAir}/mile</td>
+    <td>${trip.flyMiles.toFixed(1)} miles x $${COST_PER_MILE.flyingKingAir}/mile</td>
     <td>$${data.flyDistanceCostKingAir.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
   </tr>
   <tr>
@@ -98,16 +98,16 @@ const renderBreakdownTable = (dom, data, airport, inputs) => {
   <tr><th colspan="3" class="table-section-header">Flying Costs - Kodiak</th></tr>
   <tr>
     <td>Travel Hours
-      ${tooltip(`Average travel time from KSTP to ${airport.name} airport, in hours\n\nMileage is derived using the air distance from latitude and longitude coordinates with an average flight speed of ${FLYING_SPEED_MPH.kodiak} mph.`)}
+      ${tooltip(`Average travel time for ${trip.label}, in hours\n\nMileage is derived using total air miles with an average flight speed of ${FLYING_SPEED_MPH.kodiak} mph.`)}
     </td>
-    <td>${airport.flyingFromKSTP * (ROUND_TRIP ? 2 : 1)} ${ROUND_TRIP ? `total round-trip miles` : `miles`} / ${FLYING_SPEED_MPH.kodiak} mph</td>
+    <td>${trip.flyMiles.toFixed(1)} total miles / ${FLYING_SPEED_MPH.kodiak} mph</td>
     <td>${data.flyHoursKodiak.toFixed(2)} hrs</td>
   </tr>
   <tr>
     <td>Aircraft Cost
       ${tooltip(`The cost per flight mile of the Kodiak aircraft is derived by adding together both the fixed and variable costs of operating the aircraft over the preceding year and dividing by the total mileage flown. This gives an average cost per mile of $${COST_PER_MILE.flyingKodiak} to operate this aircraft and is updated yearly.`)}
     </td>
-    <td>${airport.flyingFromKSTP * (ROUND_TRIP ? 2 : 1)} miles x $${COST_PER_MILE.flyingKodiak}/mile</td>
+    <td>${trip.flyMiles.toFixed(1)} miles x $${COST_PER_MILE.flyingKodiak}/mile</td>
     <td>$${data.flyDistanceCostKodiak.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
   </tr>
   <tr>

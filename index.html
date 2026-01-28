@@ -27,93 +27,107 @@
 <main>
   <section>
     <h2>Trip Information</h2>
-    <div class="form-grid">
-      <div>
-        <label>Departure Airport</label>
-        <div class="static-field">KSTP - St. Paul Downtown / Holman Field</div>
-
-      </div>
-
-      <div class="autocomplete-container">
-        <label for="dest1">Destination Airport</label>
-        <div class="autocomplete-field">
-          <input autocomplete="off" id="dest1" placeholder="Enter ICAO, FAA code, or airport name" type="text">
-          <div class="autocomplete-list" hidden id="dest1-list"></div>
-        </div>
-        <div class="field-error" id="dest1-error" hidden aria-live="polite"></div>
-
-      </div>
-
-      <div class="datetime-range">
-        <div class="datetime-row datetime-picker">
-          <label for="arrival-display">Arrival</label>
-          <input
-            id="arrival-display"
-            class="datetime-input"
-            type="text"
-            placeholder="Select date/time"
-            readonly
-            aria-haspopup="dialog"
-            aria-expanded="false"
-          >
-          <input id="arrival-datetime" type="hidden">
-          <div class="datetime-popover" id="arrival-popover" role="dialog" aria-modal="false" hidden>
-            <div class="calendar-view">
-              <div class="datetime-header">
-                <button class="nav-btn prev" type="button" aria-label="Previous month">&lt;</button>
-                <div class="month-label"></div>
-                <button class="nav-btn next" type="button" aria-label="Next month">&gt;</button>
-              </div>
-              <div class="weekday-row">
-                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
-              </div>
-              <div class="calendar-grid"></div>
-            </div>
-            <div class="time-view" hidden>
-              <div class="time-header"></div>
-              <div class="time-grid"></div>
-              <div class="picker-actions">
-                <button class="back-btn" type="button">Back</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="datetime-row datetime-picker">
-          <label for="departure-display">Departure</label>
-          <input
-            id="departure-display"
-            class="datetime-input"
-            type="text"
-            placeholder="Select date/time"
-            readonly
-            aria-haspopup="dialog"
-            aria-expanded="false"
-          >
-          <input id="departure-datetime" type="hidden">
-          <div class="field-error" id="departure-error" hidden aria-live="polite"></div>
-          <div class="datetime-popover" id="departure-popover" role="dialog" aria-modal="false" hidden>
-            <div class="calendar-view">
-              <div class="datetime-header">
-                <button class="nav-btn prev" type="button" aria-label="Previous month">&lt;</button>
-                <div class="month-label"></div>
-                <button class="nav-btn next" type="button" aria-label="Next month">&gt;</button>
-              </div>
-              <div class="weekday-row">
-                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
-              </div>
-              <div class="calendar-grid"></div>
-            </div>
-            <div class="time-view" hidden>
-              <div class="time-header"></div>
-              <div class="time-grid"></div>
-              <div class="picker-actions">
-                <button class="back-btn" type="button">Back</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="city-pairs" id="city-pairs"></div>
+    <div class="pair-actions">
+      <button class="add-pair-btn" id="add-city-pair" type="button">
+        <img class="add-icon" alt="" src="assets/icons/connections.svg">
+        Add city pair
+      </button>
+      <button class="add-pair-btn remove-pair-action" id="remove-city-pair" type="button">
+        <span class="remove-icon">X</span>
+        Remove city pair
+      </button>
     </div>
+
+    <template id="city-pair-template">
+      <div class="city-pair-card">
+        <div class="city-pair-grid">
+          <div class="city-pair-field field-span">
+            <label>Origin</label>
+            <div class="static-field origin-field"></div>
+          </div>
+
+          <div class="city-pair-field field-span destination-field autocomplete-container">
+            <label>Destination</label>
+            <div class="autocomplete-field">
+              <input autocomplete="off" class="dest-input" placeholder="Enter ICAO, FAA code, or airport name" type="text">
+              <div class="autocomplete-list" hidden></div>
+            </div>
+            <div class="static-field destination-static" hidden></div>
+            <div class="field-error dest-error" hidden aria-live="polite"></div>
+          </div>
+
+          <div class="datetime-group">
+            <div class="city-pair-field datetime-picker">
+              <label>Arrival</label>
+              <input
+                class="datetime-input"
+                type="text"
+                placeholder="Select date/time"
+                readonly
+                aria-haspopup="dialog"
+                aria-expanded="false"
+              >
+              <input class="datetime-value" type="hidden">
+              <div class="datetime-popover" role="dialog" aria-modal="false" hidden>
+                <div class="calendar-view">
+                  <div class="datetime-header">
+                    <button class="nav-btn prev" type="button" aria-label="Previous month">&lt;</button>
+                    <div class="month-label"></div>
+                    <button class="nav-btn next" type="button" aria-label="Next month">&gt;</button>
+                  </div>
+                  <div class="weekday-row">
+                    <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                  </div>
+                  <div class="calendar-grid"></div>
+                </div>
+                <div class="time-view" hidden>
+                  <div class="time-header"></div>
+                  <div class="time-grid"></div>
+                  <div class="picker-actions">
+                    <button class="back-btn" type="button">Back</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="city-pair-field datetime-picker">
+              <label>Departure</label>
+              <input
+                class="datetime-input"
+                type="text"
+                placeholder="Select date/time"
+                readonly
+                aria-haspopup="dialog"
+                aria-expanded="false"
+              >
+              <input class="datetime-value" type="hidden">
+              <div class="field-error departure-error" hidden aria-live="polite"></div>
+              <div class="datetime-popover" role="dialog" aria-modal="false" hidden>
+                <div class="calendar-view">
+                  <div class="datetime-header">
+                    <button class="nav-btn prev" type="button" aria-label="Previous month">&lt;</button>
+                    <div class="month-label"></div>
+                    <button class="nav-btn next" type="button" aria-label="Next month">&gt;</button>
+                  </div>
+                  <div class="weekday-row">
+                    <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                  </div>
+                  <div class="calendar-grid"></div>
+                </div>
+                <div class="time-view" hidden>
+                  <div class="time-header"></div>
+                  <div class="time-grid"></div>
+                  <div class="picker-actions">
+                    <button class="back-btn" type="button">Back</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
 
     <div class="form-grid form-grid-spaced">
       <div>
@@ -256,7 +270,7 @@
           <li><span id="faq-cost-per-mile-driving"></span>/mile vehicle cost</li>
           <li><span id="faq-cost-per-mile-flying-kingair"></span>/mile King Air airplane cost</li>
           <li><span id="faq-cost-per-mile-flying-kodiak"></span>/mile Kodiak airplane cost</li>
-          <li>Overnight flying trip add <span id="faq-pilot-lodging"></span> for lodging and meals for two pilots</li>
+          <li>Overnight flying trip adds <span id="faq-pilot-lodging"></span> per pilot for lodging and meals for two pilots</li>
         </ul>
       </div>
     </div>
@@ -291,6 +305,6 @@
   setText("faq-cost-per-mile-driving", `$${COST_PER_MILE.driving}`);
   setText("faq-cost-per-mile-flying-kingair", `$${COST_PER_MILE.flyingKingAir}`);
   setText("faq-cost-per-mile-flying-kodiak", `$${COST_PER_MILE.flyingKodiak}`);
-  setText("faq-pilot-lodging", `$${PILOT_LODGING.toLocaleString()}`);
+  setText("faq-pilot-lodging", `$${ACCOMMODATIONS_PER_PERSON.toLocaleString()}`);
 </script>
 </html>

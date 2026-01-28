@@ -1,19 +1,9 @@
-const initDateTimePickers = (scheduleRecalc) => {
-  const schedule = typeof scheduleRecalc === "function" ? scheduleRecalc : () => {};
-  const pickerConfigs = [
-    {
-      displayInput: document.getElementById("arrival-display"),
-      valueInput: document.getElementById("arrival-datetime"),
-      popover: document.getElementById("arrival-popover")
-    },
-    {
-      displayInput: document.getElementById("departure-display"),
-      valueInput: document.getElementById("departure-datetime"),
-      popover: document.getElementById("departure-popover")
-    }
-  ];
+let pickerInstances = [];
+let globalListenerAttached = false;
 
-  const pickerInstances = [];
+const initDateTimePickers = (scheduleRecalc, root = document) => {
+  const schedule = typeof scheduleRecalc === "function" ? scheduleRecalc : () => {};
+  const pickerNodes = Array.from(root.querySelectorAll(".datetime-picker"));
 
   function closeAllPickers(exceptPopover) {
     pickerInstances.forEach(picker => picker.close(exceptPopover));
@@ -203,22 +193,32 @@ const initDateTimePickers = (scheduleRecalc) => {
     };
   }
 
-  pickerConfigs.forEach(config => {
-    if (!config.displayInput || !config.valueInput || !config.popover) {
+  pickerNodes.forEach(node => {
+    if (node.dataset.pickerInitialized === "true") {
       return;
     }
-    pickerInstances.push(initDateTimePicker(config));
+    const displayInput = node.querySelector(".datetime-input");
+    const valueInput = node.querySelector(".datetime-value");
+    const popover = node.querySelector(".datetime-popover");
+    if (!displayInput || !valueInput || !popover) {
+      return;
+    }
+    node.dataset.pickerInitialized = "true";
+    pickerInstances.push(initDateTimePicker({displayInput, valueInput, popover}));
   });
 
-  document.addEventListener("click", event => {
-    const pickerRoot = event.target.closest(".datetime-picker");
-    const clickedPopover = pickerRoot ? pickerRoot.querySelector(".datetime-popover") : null;
-    if (!pickerRoot) {
-      closeAllPickers();
-      return;
-    }
-    closeAllPickers(clickedPopover);
-  });
+  if (!globalListenerAttached) {
+    document.addEventListener("click", event => {
+      const pickerRoot = event.target.closest(".datetime-picker");
+      const clickedPopover = pickerRoot ? pickerRoot.querySelector(".datetime-popover") : null;
+      if (!pickerRoot) {
+        closeAllPickers();
+        return;
+      }
+      closeAllPickers(clickedPopover);
+    });
+    globalListenerAttached = true;
+  }
 };
 
 window.initDateTimePickers = initDateTimePickers;

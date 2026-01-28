@@ -11,6 +11,12 @@
   display: none !important;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Brandon Grotesque", "Open Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
@@ -99,7 +105,7 @@ label {
 
 input, select {
   width: 100%;
-  padding: 0.45rem;
+  padding: 0.55rem;
   margin-top: 0.25rem;
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
@@ -118,6 +124,111 @@ input, select {
 
 .autocomplete-container {
   position: relative;
+}
+
+.city-pairs {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.pair-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.city-pair-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 0;
+  background: white;
+  position: relative;
+}
+
+.city-pair-card--flat {
+  border: none;
+  padding: 0;
+}
+
+.city-pairs.has-multiple .city-pair-card {
+  border: none;
+  padding: 0;
+}
+
+
+.add-pair-btn {
+  border: 1px dashed var(--mndot-blue);
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--mndot-blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  margin-left: 0;
+}
+
+.add-pair-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.add-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.remove-pair-action .remove-icon {
+  color: var(--mndot-blue);
+  font-weight: 800;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.city-pair-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.city-pair-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+}
+
+.city-pair-field.field-span {
+  grid-column: auto;
+}
+
+.city-pair-card label {
+  margin-bottom: 0.2rem;
+}
+
+.city-pair-card input,
+.city-pair-card .static-field {
+  margin-top: 0;
+}
+
+.city-pair-card.pair-secondary label {
+  display: none;
+}
+
+.city-pair-card.pair-secondary input,
+.city-pair-card.pair-secondary .static-field {
+  margin-top: 0;
+}
+
+.datetime-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
 }
 
 .autocomplete-field {
@@ -147,20 +258,18 @@ input, select {
   background: var(--mndot-gray-100);
 }
 
-.datetime-range {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-}
-
-.datetime-row {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
 .datetime-picker {
   position: relative;
+}
+
+.city-pair-card .field-error {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 4px);
+  background: white;
+  padding: 0 0.25rem;
+  z-index: 2;
+  margin-top: 0;
 }
 
 .datetime-input {
@@ -172,12 +281,14 @@ input, select {
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
-  width: min(340px, 100%);
+  width: 340px;
+  min-width: 320px;
+  max-width: 100%;
   background: white;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-  padding: 0.75rem;
+  padding: 0.65rem;
   z-index: 1200;
 }
 
@@ -206,13 +317,16 @@ input, select {
   font-size: 0.75rem;
   text-align: center;
   color: var(--mndot-gray-700);
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.25rem;
+  width: 100%;
 }
 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 0.2rem;
+  width: 100%;
+  grid-auto-rows: 32px;
 }
 
 .calendar-grid .empty {
@@ -224,7 +338,9 @@ input, select {
   background: white;
   border-radius: 4px;
   height: 32px;
+  width: 100%;
   cursor: pointer;
+  padding: 0;
 }
 
 .day-btn:hover {
@@ -288,6 +404,44 @@ input, select {
   border-radius: 4px;
   padding: 0.35rem 0.6rem;
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .city-pair-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pair-actions {
+    width: 100%;
+  }
+
+  .add-pair-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .datetime-popover {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-width: none;
+    top: 20%;
+  }
+
+  .city-pairs.has-multiple .city-pair-card {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+  }
+
+  .city-pair-card.pair-secondary label {
+    display: block;
+  }
+
+  .city-pair-card.pair-secondary input,
+  .city-pair-card.pair-secondary .static-field {
+    margin-top: 0.25rem;
+  }
 }
 
 .results-grid {
@@ -420,4 +574,6 @@ th {
 .faq-answer li {
   margin-bottom: 0.4rem;
 }
+
+
 

@@ -1,5 +1,6 @@
 const calculateTripCosts = ({
-  airport,
+  driveMiles,
+  flyMiles,
   hoursAtDest,
   numDirectors,
   numManagers,
@@ -16,12 +17,11 @@ const calculateTripCosts = ({
   const totalEmployeeCostPerHour =
     costDirectors + costManagers + costGeneralists;
 
-  const driveHours =
-    airport.drivingFromKSTP / DRIVING_SPEED_MPH * (ROUND_TRIP ? 2 : 1);
+  const driveHours = driveMiles / DRIVING_SPEED_MPH;
   const carsNeeded =
     Math.ceil(totalEmployees / VEHICLE_CAPACITY);
   const driveDistanceCost =
-    airport.drivingFromKSTP * COST_PER_MILE.driving * (ROUND_TRIP ? 2 : 1) * carsNeeded;
+    driveMiles * COST_PER_MILE.driving * carsNeeded;
   const numDays =
     Math.floor((driveHours + hoursAtDest) / HOURS_ALLOWED_PER_DAY);
   const driveLodging =
@@ -32,9 +32,9 @@ const calculateTripCosts = ({
     driveEmployeeTotal + driveDistanceCost + driveLodging;
 
   const flyHoursKingAir =
-    airport.flyingFromKSTP / FLYING_SPEED_MPH.kingAir * (ROUND_TRIP ? 2 : 1);
+    flyMiles / FLYING_SPEED_MPH.kingAir;
   const flyDistanceCostKingAir =
-    airport.flyingFromKSTP * COST_PER_MILE.flyingKingAir * (ROUND_TRIP ? 2 : 1);
+    flyMiles * COST_PER_MILE.flyingKingAir;
   const flyNumDaysKingAir =
     Math.floor((flyHoursKingAir + hoursAtDest) / HOURS_ALLOWED_PER_DAY_FLYING);
   const flyLodgingKingAir =
@@ -43,9 +43,9 @@ const calculateTripCosts = ({
     flyDistanceCostKingAir + flyLodgingKingAir;
 
   const flyHoursKodiak =
-    airport.flyingFromKSTP / FLYING_SPEED_MPH.kodiak * (ROUND_TRIP ? 2 : 1);
+    flyMiles / FLYING_SPEED_MPH.kodiak;
   const flyDistanceCostKodiak =
-    airport.flyingFromKSTP * COST_PER_MILE.flyingKodiak * (ROUND_TRIP ? 2 : 1);
+    flyMiles * COST_PER_MILE.flyingKodiak;
   const flyNumDaysKodiak =
     Math.floor((flyHoursKodiak + hoursAtDest) / HOURS_ALLOWED_PER_DAY_FLYING);
   const flyLodgingKodiak =
