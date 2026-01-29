@@ -24,8 +24,8 @@ const ROLES = {
 
 const COST_PER_MILE = {
   driving: 0.725,
-  flyingKingAir: 15.52,
-  flyingKodiak: 7.76 //completely made up
+  flyingKingAir: 11.86,
+  flyingKodiak: 11.50 
 };
 
 const FLYING_SPEED_MPH = {
